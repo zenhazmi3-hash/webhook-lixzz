@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Webhook Pakasir - Lixzz</title>
+    <style>
+        :root {
+            --bg-color: #050b14;
+            --card-bg: #0b192c;
+            --accent-blue: #00d2ff;
+            --text-main: #ffffff;
+            --text-muted: #8ca9c4;
+            --border-color: #1e3e62;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--accent-blue);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        pre {
+            background-color: #02060c;
+            color: #38ef7d;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #132f4c;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+        }
+
+        .status-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #02060c;
+            padding: 12px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .badge {
+            background-color: #005f9e;
+            color: #ffffff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: var(--accent-blue);
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #38ef7d;
+            box-shadow: 0 0 10px rgba(56, 239, 125, 0.5);
+        }
+
+        .instruction {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .instruction code {
+            background: #02060c;
+            color: var(--accent-blue);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>LIXZZ WEBHOOK LISTENER</h1>
+            <p>Pusat Penerima Notifikasi Otomatis Pembayaran Pakasir</p>
+        </header>
+
+        <div class="card">
+            <h2>Status Koneksi Webhook</h2>
+            <div class="status-box">
+                <span>Endpoint Aktif & Menunggu Data Masuk</span>
+                <span class="badge" id="connStatus">STANDBY</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Payload Data Terakhir Masuk</h2>
+            <pre id="webhookData">Belum ada data webhook yang diterima hari ini...</pre>
+            <button class="btn" onclick="clearLog()">Bersihkan Log</button>
+        </div>
+
+        <div class="card">
+            <h2>Panduan Singkat Integrasi</h2>
+            <div class="instruction">
+                <p>1. Daftarkan URL halaman web / backend penerima ini di dashboard Pakasir proyek <code>lixzz</code>.</p>
+                <p>2. Pastikan endpoint backend kamu memproses method <code>POST</code> dari server Pakasir.</p>
+                <p>3. Tangkap parameter <code>order_id</code> dan <code>status</code> untuk memicu eksekusi otomatis bot (seperti pembuatan akun panel Pterodactyl).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulasi fungsi untuk membersihkan log tampilan
+        function clearLog() {
+            document.getElementById('webhookData').innerText = "Log dibersihkan. Menunggu data webhook baru...";
+            document.getElementById('connStatus').innerText = "STANDBY";
+            document.getElementById('connStatus').style.backgroundColor = "#005f9e";
+        }
+    </script>
+</body>
+</html>
